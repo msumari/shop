@@ -1,11 +1,20 @@
 import React, { useEffect, useRef, useState } from "react";
-import app from "./base";
+import * as ml5 from "ml5";
+import { app } from "./base";
 import "./home.css";
 
 const Home = () => {
   const fileInputRef = useRef();
   const [image, setImage] = useState();
   const [preview, setPreview] = useState();
+  const [confidence, setConfidence] = useState();
+  const [label, setLabel] = useState();
+  // Initialize the Image Classifier method with shoe model
+  const classifier = ml5.imageClassifier("./model/model.json", modelLoaded);
+  // When the model is loaded
+  function modelLoaded() {
+    console.log("Model Loaded!");
+  }
   useEffect(() => {
     if (image) {
       const reader = new FileReader();
@@ -32,6 +41,24 @@ const Home = () => {
     fileInputRef.current.click();
   };
 
+  const img = document.querySelector("#myImage");
+
+  if (img != null) {
+    classifier.predict(img, 3, (error, result) => {
+      if (error) {
+        console.error(error);
+        return;
+      }
+      console.log(result[0]);
+      setLabel(result[0].label);
+      setConfidence(result[0].confidence);
+    });
+  }
+
+  // console.log(img);
+
+  let assurance = confidence * 100;
+
   return (
     <div>
       <div className="header">
@@ -40,6 +67,7 @@ const Home = () => {
       </div>
       <div className="uploader">
         <img
+          id="myImage"
           src={preview}
           alt="upload"
           onClick={() => {
@@ -56,6 +84,12 @@ const Home = () => {
             onChange={store}
           />
         </form>
+        <div>
+          <h3>Label:</h3>
+          <h4>{label}</h4>
+          <h3>Confidence:</h3>
+          <h4>{assurance}</h4>
+        </div>
         <button>Locate</button>
       </div>
     </div>

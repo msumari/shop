@@ -18,7 +18,7 @@
 .uploader {
   display: grid;
   place-items: center;
-  height: 90vh;
+  min-height: 90vh;
   background-color: #910c7b;
 }
 
