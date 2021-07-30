@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { db } from "./base";
 import "./vendor.css";
 
 const Vendor = () => {
@@ -9,10 +10,18 @@ const Vendor = () => {
   const handleLogin = (e) => {
     e.preventDefault();
     const { name, product } = e.target.elements;
-    console.log(name.value);
-    console.log(product.value);
-    console.log(lat);
-    console.log(lng);
+    try {
+      db.collection("vendors").add({
+        name: name.value,
+        product: product.value,
+        latitude: lat,
+        longitude: lng,
+      });
+      console.log("data succesfully pushed");
+    } catch (error) {
+      console.log(error);
+    }
+
     e.target.reset();
   };
 
