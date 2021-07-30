@@ -8,7 +8,7 @@ const Home = () => {
   const fileInputRef = useRef();
   const [image, setImage] = useState();
   const [preview, setPreview] = useState();
-  const [confidence, setConfidence] = useState();
+  const [confidence, setConfidence] = useState(0);
   const [label, setLabel] = useState();
   const [map, setMap] = useState(false);
   // Initialize the Image Classifier method with shoe model
