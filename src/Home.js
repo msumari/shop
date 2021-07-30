@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import * as ml5 from "ml5";
 import { app } from "./base";
 import "./home.css";
+import Map from "./Map";
 
 const Home = () => {
   const fileInputRef = useRef();
@@ -9,6 +10,7 @@ const Home = () => {
   const [preview, setPreview] = useState();
   const [confidence, setConfidence] = useState();
   const [label, setLabel] = useState();
+  const [map, setMap] = useState(false);
   // Initialize the Image Classifier method with shoe model
   const classifier = ml5.imageClassifier("./model/model.json", modelLoaded);
   // When the model is loaded
@@ -49,7 +51,7 @@ const Home = () => {
         console.error(error);
         return;
       }
-      console.log(result[0]);
+
       setLabel(result[0].label);
       setConfidence(result[0].confidence);
     });
@@ -90,7 +92,14 @@ const Home = () => {
           <h3>Confidence:</h3>
           <h4>{assurance}</h4>
         </div>
-        <button>Locate</button>
+        <button
+          onClick={() => {
+            setMap(true);
+          }}
+        >
+          Locate
+        </button>
+        {map && <Map map={map} setMap={setMap} label={label} />}
       </div>
     </div>
   );
