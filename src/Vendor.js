@@ -1,4 +1,4 @@
-import { React, useState } from "react";
+import React, { useState } from "react";
 import "./vendor.css";
 
 const Vendor = () => {
@@ -6,9 +6,13 @@ const Vendor = () => {
   const [lng, setLng] = useState(null);
   const [status, setStatus] = useState(null);
 
-  const handleLogin = (cred, e) => {
+  const handleLogin = (e) => {
     e.preventDefault();
-    console.log(cred);
+    const { name, product } = e.target.elements;
+    console.log(name.value);
+    console.log(product.value);
+    console.log(lat);
+    console.log(lng);
     e.target.reset();
   };
 
