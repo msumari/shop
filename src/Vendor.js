@@ -9,11 +9,12 @@ const Vendor = () => {
 
   const handleLogin = (e) => {
     e.preventDefault();
-    const { name, product } = e.target.elements;
+    const { name, product, price } = e.target.elements;
     try {
       db.collection("vendors").add({
         name: name.value,
         product: product.value,
+        price: price.value,
         latitude: lat,
         longitude: lng,
       });
@@ -60,6 +61,13 @@ const Vendor = () => {
           name="product"
           type="name"
           placeholder="Product"
+        />
+        <label>Price</label>
+        <input
+          className="straight"
+          name="price"
+          type="number"
+          placeholder="Price"
         />
 
         <button type="submit">Register</button>

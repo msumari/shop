@@ -1,12 +1,20 @@
 import React, { useState } from "react";
 import { db } from "./base";
+import FcShop from "react-icons";
 import GoogleMapReact from "google-map-react";
 import "./map.css";
 
-const Marker = ({ text }) => <div>{text}</div>;
+const Marker = ({ text, price }) => {
+  <div>
+    <FcShop />
+    <div>{text}</div>
+    <div>{price}</div>
+  </div>;
+};
 
 const Map = ({ setMap, label, center, zoom }) => {
   const [name, setName] = useState("");
+  const [price, setPrice] = useState("");
   const [longitude, setLongitude] = useState("");
   const [latitude, setLatitude] = useState("");
 
@@ -18,6 +26,7 @@ const Map = ({ setMap, label, center, zoom }) => {
           let data = element.data();
           if (data.product === label) {
             setName(data.name);
+            setPrice(data.price);
             setLongitude(data.longitude);
             setLatitude(data.latitude);
           }
@@ -34,7 +43,7 @@ const Map = ({ setMap, label, center, zoom }) => {
         defaultCenter={center}
         defaultZoom={zoom}
       >
-        <Marker lat={latitude} lng={longitude} text={name} />
+        <Marker lat={latitude} lng={longitude} text={name} price={price} />
       </GoogleMapReact>
     </div>
   );
