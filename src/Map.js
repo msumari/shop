@@ -1,20 +1,37 @@
 import React, { useState } from "react";
 import { db } from "./base";
-import FcShop from "react-icons";
 import GoogleMapReact from "google-map-react";
 import "./map.css";
 
-const Marker = ({ text, price }) => {
+const Marker = ({ text }) => {
   <div>
-    <FcShop />
     <div>{text}</div>
-    <div>{price}</div>
+  </div>;
+};
+
+const Detail = ({ name, price, product }) => {
+  <div className="card">
+    <h2>Seller Detail</h2>
+    <div className="detail">
+      <h4>Name : </h4>
+      <h4>{name}</h4>
+    </div>
+    <div className="detail">
+      <h4>Product : </h4>
+      <h4>{product}</h4>
+    </div>
+    <div className="detail">
+      <h4>Price : </h4>
+      <h4>{price}</h4>
+    </div>
   </div>;
 };
 
 const Map = ({ setMap, label, center, zoom }) => {
+  const [detail, setDetail] = useState(false);
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
+  const [product, setProduct] = useState("");
   const [longitude, setLongitude] = useState("");
   const [latitude, setLatitude] = useState("");
 
@@ -29,6 +46,7 @@ const Map = ({ setMap, label, center, zoom }) => {
             setPrice(data.price);
             setLongitude(data.longitude);
             setLatitude(data.latitude);
+            setProduct(data.product);
           }
         });
       });
@@ -43,8 +61,16 @@ const Map = ({ setMap, label, center, zoom }) => {
         defaultCenter={center}
         defaultZoom={zoom}
       >
-        <Marker lat={latitude} lng={longitude} text={name} price={price} />
+        <Marker
+          lat={latitude}
+          lng={longitude}
+          text={name}
+          onClick={() => {
+            setDetail(true);
+          }}
+        />
       </GoogleMapReact>
+      {detail && <Detail name={name} price={price} product={product} />}
     </div>
   );
 };

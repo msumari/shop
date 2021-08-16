@@ -4,3 +4,19 @@
   border-radius: 15%;
   margin: 3%;
 }
+
+.card {
+  width: 50%;
+  background-color: white;
+  height: 30vh;
+  border-radius: 20%;
+  padding: 10px;
+  display: grid;
+  place-items: center;
+}
+
+.detail {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
