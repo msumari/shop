@@ -4,31 +4,34 @@ import GoogleMapReact from "google-map-react";
 import "./map.css";
 
 const Marker = ({ text }) => {
-  <div>
-    <div>{text}</div>
-  </div>;
+  return (
+    <div>
+      <div className="mark">{text}🛒</div>
+    </div>
+  );
 };
 
 const Detail = ({ name, price, product }) => {
-  <div className="card">
-    <h2>Seller Detail</h2>
-    <div className="detail">
-      <h4>Name : </h4>
-      <h4>{name}</h4>
+  return (
+    <div className="card">
+      <h2>Seller Detail</h2>
+      <div className="detail">
+        <h4>Name : </h4>
+        <h4>{name}</h4>
+      </div>
+      <div className="detail">
+        <h4>Product : </h4>
+        <h4>{product}</h4>
+      </div>
+      <div className="detail">
+        <h4>Price : </h4>
+        <h4>{price}</h4>
+      </div>
     </div>
-    <div className="detail">
-      <h4>Product : </h4>
-      <h4>{product}</h4>
-    </div>
-    <div className="detail">
-      <h4>Price : </h4>
-      <h4>{price}</h4>
-    </div>
-  </div>;
+  );
 };
 
 const Map = ({ setMap, label, center, zoom }) => {
-  const [detail, setDetail] = useState(false);
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
   const [product, setProduct] = useState("");
@@ -70,7 +73,7 @@ const Map = ({ setMap, label, center, zoom }) => {
           }}
         />
       </GoogleMapReact>
-      {detail && <Detail name={name} price={price} product={product} />}
+      <Detail name={name} price={price} product={product} />
     </div>
   );
 };

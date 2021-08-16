@@ -1,22 +1,25 @@
 .map {
-  width: 80%;
+  width: 70%;
   height: 60vh;
   border-radius: 15%;
   margin: 3%;
 }
 
 .card {
-  width: 50%;
+  width: 20%;
   background-color: white;
-  height: 30vh;
-  border-radius: 20%;
-  padding: 10px;
+  height: 20vh;
+  border-radius: 10%;
   display: grid;
+  margin-left: 90%;
+  margin-top: -58%;
+  z-index: 10;
   place-items: center;
 }
 
 .detail {
   display: flex;
+  margin-top: -60px;
   align-items: center;
   justify-content: center;
 }
