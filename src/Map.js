@@ -64,14 +64,7 @@ const Map = ({ setMap, label, center, zoom }) => {
         defaultCenter={center}
         defaultZoom={zoom}
       >
-        <Marker
-          lat={latitude}
-          lng={longitude}
-          text={name}
-          onClick={() => {
-            setDetail(true);
-          }}
-        />
+        <Marker lat={latitude} lng={longitude} text={name} />
       </GoogleMapReact>
       <Detail name={name} price={price} product={product} />
     </div>
